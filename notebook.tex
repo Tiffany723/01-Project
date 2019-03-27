@@ -1,0 +1,1100 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Investigate\_a\_Dataset}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{quote}
+\textbf{Tip}: Welcome to the Investigate a Dataset project! You will
+find tips in quoted sections like this to help organize your approach to
+your investigation. Before submitting your project, it will be a good
+idea to go back through your report and remove these sections to make
+the presentation of your work as tidy as possible. First things first,
+you might want to double-click this Markdown cell and change the title
+so that it reflects your dataset and investigation.
+\end{quote}
+
+\section{Project: Hospitals in Brazil No-show Data
+Analysis}\label{project-hospitals-in-brazil-no-show-data-analysis}
+
+\subsection{Table of Contents}\label{table-of-contents}
+
+Introduction
+
+Data Wrangling
+
+Exploratory Data Analysis
+
+Conclusions
+
+     \#\# Introduction
+
+\begin{quote}
+\textbf{Tip}: In this section of the report, provide a brief
+introduction to the dataset you've selected for analysis. At the end of
+this section, describe the questions that you plan on exploring over the
+course of the report. Try to build your report around the analysis of at
+least one dependent variable and three independent variables. If you're
+not sure what questions to ask, then make sure you familiarize yourself
+with the dataset, its variables and the dataset context for ideas of
+what to explore.
+\end{quote}
+
+\begin{quote}
+If you haven't yet selected and downloaded your data, make sure you do
+that first before coming back here. In order to work with the data in
+this workspace, you also need to upload it to the workspace. To do so,
+click on the jupyter icon in the upper left to be taken back to the
+workspace directory. There should be an 'Upload' button in the upper
+right that will let you add your data file(s) to the workspace. You can
+then click on the .ipynb file name to come back here.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}276}]:} \PY{c+c1}{\PYZsh{}import csv file}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+     \#\# Data Wrangling
+
+\begin{quote}
+\textbf{Tip}: In this section of the report, you will load in the data,
+check for cleanliness, and then trim and clean your dataset for
+analysis. Make sure that you document your steps carefully and justify
+your cleaning decisions.
+\end{quote}
+
+\subsubsection{General Properties}\label{general-properties}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}277}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{noshowappointments\PYZhy{}kagglev2\PYZhy{}may\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}277}]:}       PatientId  AppointmentID Gender          ScheduledDay  \textbackslash{}
+          0  2.987250e+13        5642903      F  2016-04-29T18:38:08Z   
+          1  5.589978e+14        5642503      M  2016-04-29T16:08:27Z   
+          2  4.262962e+12        5642549      F  2016-04-29T16:19:04Z   
+          3  8.679512e+11        5642828      F  2016-04-29T17:29:31Z   
+          4  8.841186e+12        5642494      F  2016-04-29T16:07:23Z   
+          
+                   AppointmentDay  Age      Neighbourhood  Scholarship  Hipertension  \textbackslash{}
+          0  2016-04-29T00:00:00Z   62    JARDIM DA PENHA            0             1   
+          1  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             0   
+          2  2016-04-29T00:00:00Z   62      MATA DA PRAIA            0             0   
+          3  2016-04-29T00:00:00Z    8  PONTAL DE CAMBURI            0             0   
+          4  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             1   
+          
+             Diabetes  Alcoholism  Handcap  SMS\_received No-show  
+          0         0           0        0             0      No  
+          1         0           0        0             0      No  
+          2         0           0        0             0      No  
+          3         0           0        0             0      No  
+          4         1           0        0             0      No  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}278}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}278}]:} (110527, 14)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}279}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}279}]:}           PatientId  AppointmentID            Age    Scholarship  \textbackslash{}
+          count  1.105270e+05   1.105270e+05  110527.000000  110527.000000   
+          mean   1.474963e+14   5.675305e+06      37.088874       0.098266   
+          std    2.560949e+14   7.129575e+04      23.110205       0.297675   
+          min    3.921784e+04   5.030230e+06      -1.000000       0.000000   
+          25\%    4.172614e+12   5.640286e+06      18.000000       0.000000   
+          50\%    3.173184e+13   5.680573e+06      37.000000       0.000000   
+          75\%    9.439172e+13   5.725524e+06      55.000000       0.000000   
+          max    9.999816e+14   5.790484e+06     115.000000       1.000000   
+          
+                  Hipertension       Diabetes     Alcoholism        Handcap  \textbackslash{}
+          count  110527.000000  110527.000000  110527.000000  110527.000000   
+          mean        0.197246       0.071865       0.030400       0.022248   
+          std         0.397921       0.258265       0.171686       0.161543   
+          min         0.000000       0.000000       0.000000       0.000000   
+          25\%         0.000000       0.000000       0.000000       0.000000   
+          50\%         0.000000       0.000000       0.000000       0.000000   
+          75\%         0.000000       0.000000       0.000000       0.000000   
+          max         1.000000       1.000000       1.000000       4.000000   
+          
+                  SMS\_received  
+          count  110527.000000  
+          mean        0.321026  
+          std         0.466873  
+          min         0.000000  
+          25\%         0.000000  
+          50\%         0.000000  
+          75\%         1.000000  
+          max         1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}280}]:} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppointmentID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}281}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}281}]:}   Gender          ScheduledDay        AppointmentDay  Age      Neighbourhood  \textbackslash{}
+          0      F  2016-04-29T18:38:08Z  2016-04-29T00:00:00Z   62    JARDIM DA PENHA   
+          1      M  2016-04-29T16:08:27Z  2016-04-29T00:00:00Z   56    JARDIM DA PENHA   
+          2      F  2016-04-29T16:19:04Z  2016-04-29T00:00:00Z   62      MATA DA PRAIA   
+          3      F  2016-04-29T17:29:31Z  2016-04-29T00:00:00Z    8  PONTAL DE CAMBURI   
+          4      F  2016-04-29T16:07:23Z  2016-04-29T00:00:00Z   56    JARDIM DA PENHA   
+          
+             Scholarship  Hipertension  Diabetes  Alcoholism  Handcap  SMS\_received  \textbackslash{}
+          0            0             1         0           0        0             0   
+          1            0             0         0           0        0             0   
+          2            0             0         0           0        0             0   
+          3            0             0         0           0        0             0   
+          4            0             1         1           0        0             0   
+          
+            No-show  
+          0      No  
+          1      No  
+          2      No  
+          3      No  
+          4      No  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}282}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 110527 entries, 0 to 110526
+Data columns (total 12 columns):
+Gender            110527 non-null object
+ScheduledDay      110527 non-null object
+AppointmentDay    110527 non-null object
+Age               110527 non-null int64
+Neighbourhood     110527 non-null object
+Scholarship       110527 non-null int64
+Hipertension      110527 non-null int64
+Diabetes          110527 non-null int64
+Alcoholism        110527 non-null int64
+Handcap           110527 non-null int64
+SMS\_received      110527 non-null int64
+No-show           110527 non-null object
+dtypes: int64(7), object(5)
+memory usage: 10.1+ MB
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{Tip}: You should \emph{not} perform too many operations in each
+cell. Create cells freely to explore your data. One option that you can
+take with this project is to do a lot of explorations in an initial
+notebook. These don't have to be organized, but make sure you use enough
+comments to understand the purpose of each code cell. Then, after you're
+done with your analysis, create a duplicate notebook where you will trim
+the excess and organize your steps so that you have a flowing, cohesive
+report.
+\end{quote}
+
+\begin{quote}
+\textbf{Tip}: Make sure that you keep your reader informed on the steps
+that you are taking in your investigation. Follow every code cell, or
+every set of related code cells, with a markdown cell to describe to the
+reader what was found in the preceding cell(s). Try to make it so that
+the reader can then understand what they will be seeing in the following
+cell(s).
+\end{quote}
+
+\subsubsection{Data Cleaning : Filter only No-show
+values}\label{data-cleaning-filter-only-no-show-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}283}]:} \PY{n}{df}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n+nb}{str}\PY{p}{,} \PY{n}{columns} \PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZhy{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No\PYZus{}show}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}283}]:}   Gender          ScheduledDay        AppointmentDay  Age      Neighbourhood  \textbackslash{}
+          0      F  2016-04-29T18:38:08Z  2016-04-29T00:00:00Z   62    JARDIM DA PENHA   
+          1      M  2016-04-29T16:08:27Z  2016-04-29T00:00:00Z   56    JARDIM DA PENHA   
+          2      F  2016-04-29T16:19:04Z  2016-04-29T00:00:00Z   62      MATA DA PRAIA   
+          3      F  2016-04-29T17:29:31Z  2016-04-29T00:00:00Z    8  PONTAL DE CAMBURI   
+          4      F  2016-04-29T16:07:23Z  2016-04-29T00:00:00Z   56    JARDIM DA PENHA   
+          
+             Scholarship  Hipertension  Diabetes  Alcoholism  Handcap  SMS\_received  \textbackslash{}
+          0            0             1         0           0        0             0   
+          1            0             0         0           0        0             0   
+          2            0             0         0           0        0             0   
+          3            0             0         0           0        0             0   
+          4            0             1         1           0        0             0   
+          
+            No\_show  
+          0      No  
+          1      No  
+          2      No  
+          3      No  
+          4      No  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}284}]:} \PY{n}{df\PYZus{}noshow} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{df\PYZus{}noshow}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Ji\textbackslash{}anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}frame.py:3694: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  errors=errors)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}285}]:} \PY{n}{df\PYZus{}noshow}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}285}]:}    Gender          ScheduledDay        AppointmentDay  Age   Neighbourhood  \textbackslash{}
+          6       F  2016-04-27T15:05:12Z  2016-04-29T00:00:00Z   23      GOIABEIRAS   
+          7       F  2016-04-27T15:39:58Z  2016-04-29T00:00:00Z   39      GOIABEIRAS   
+          11      M  2016-04-26T08:44:12Z  2016-04-29T00:00:00Z   29  NOVA PALESTINA   
+          17      F  2016-04-28T09:28:57Z  2016-04-29T00:00:00Z   40       CONQUISTA   
+          20      F  2016-04-27T07:51:14Z  2016-04-29T00:00:00Z   30  NOVA PALESTINA   
+          
+              Scholarship  Hipertension  Diabetes  Alcoholism  Handcap  SMS\_received  
+          6             0             0         0           0        0             0  
+          7             0             0         0           0        0             0  
+          11            0             0         0           0        0             1  
+          17            1             0         0           0        0             0  
+          20            0             0         0           0        0             0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}286}]:} \PY{n}{df\PYZus{}noshow}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}286}]:} (22319, 11)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}287}]:} \PY{n}{df\PYZus{}show} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{df\PYZus{}show}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}show}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Ji\textbackslash{}anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}frame.py:3694: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  errors=errors)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}287}]:} (88208, 11)
+\end{Verbatim}
+            
+     \#\# Exploratory Data Analysis
+
+\begin{quote}
+\textbf{Tip}: Now that you've trimmed and cleaned your data, you're
+ready to move on to exploration. Compute statistics and create
+visualizations with the goal of addressing the research questions that
+you posed in the Introduction section. It is recommended that you be
+systematic with your approach. Look at one variable at a time, and then
+follow it up by looking at relationships between variables.
+\end{quote}
+
+\subsubsection{Research Question 1 : What is the most factor impacted on
+No-show
+rates?}\label{research-question-1-what-is-the-most-factor-impacted-on-no-show-rates}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}288}]:} \PY{n}{df\PYZus{}noshow}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{figsize} \PY{o}{=}\PY{p}{(} \PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}289}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alcoholism}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alcoholism}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+Alcholism does not have any relationship with No-show.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}290}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Diabetes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Diabetes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+If the patient has Diabetes, he/she tends to No-show less.(0.8\%
+decrease)
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}291}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Handcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Handcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}292}]:} \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Handcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}292}]:} 0    21912
+          1      366
+          2       37
+          3        3
+          4        1
+          Name: Handcap, dtype: int64
+\end{Verbatim}
+            
+    \begin{quote}
+The normal patient has slightly more tendency of No-show.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}293}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hipertension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hipertension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+The patient with Hipertension has lower tendency of No-show.(2.8\%
+decrease)
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}389}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMS\PYZus{}received}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMS\PYZus{}received}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{df\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMS\PYZus{}received}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+Sending SMS does not have an effect on decreasing the rate of
+No-show.(11.1\% increases)
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}295}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scholarship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scholarship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{autopct} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+The patient with Scholarship tends to more absence.(1.8\% increase)
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}390}]:} \PY{n}{df\PYZus{}show}\PY{o}{.}\PY{n}{Age}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{df\PYZus{}noshow}\PY{o}{.}\PY{n}{Age}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZus{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The relationship between No\PYZhy{}show and age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The number of patients}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \textgreater{} Middle teenager and early 20s tend to have higher
+No-show rates.
+
+    \subsubsection{Research Question 2 : Does the location of hospital have
+the relationship with No-show
+rates?}\label{research-question-2-does-the-location-of-hospital-have-the-relationship-with-no-show-rates}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}374}]:} \PY{n}{ds\PYZus{}no\PYZus{}nbh} \PY{o}{=} \PY{n}{df\PYZus{}noshow}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}no\PYZus{}nbh} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ds\PYZus{}no\PYZus{}nbh}\PY{p}{)}
+          \PY{n}{df\PYZus{}no\PYZus{}nbh}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace} \PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}no\PYZus{}nbh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neighbourhood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}no\PYZus{}nbh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neighbourhood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}no\PYZus{}nbh}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}374}]:}     Neighbourhood  Count
+          0  JARDIM CAMBURI   1465
+          1     MARIA ORTIZ   1219
+          2         ITARARÉ    923
+          3     RESISTÊNCIA    906
+          4          CENTRO    703
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}377}]:} \PY{n}{ds\PYZus{}all\PYZus{}nbh} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}all\PYZus{}nbh} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ds\PYZus{}all\PYZus{}nbh}\PY{p}{)}
+          \PY{n}{df\PYZus{}all\PYZus{}nbh}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace} \PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}all\PYZus{}nbh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neighbourhood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}all\PYZus{}nbh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neighbourhood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}all\PYZus{}nbh}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}377}]:}      Neighbourhood  Count
+          0   JARDIM CAMBURI   7717
+          1      MARIA ORTIZ   5805
+          2      RESISTÊNCIA   4431
+          3  JARDIM DA PENHA   3877
+          4          ITARARÉ   3514
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}391}]:} \PY{n}{ds\PYZus{}nbh} \PY{o}{=} \PY{n}{ds\PYZus{}no\PYZus{}nbh}\PY{o}{/}\PY{n}{ds\PYZus{}all\PYZus{}nbh}
+          \PY{n}{df\PYZus{}nbh} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ds\PYZus{}nbh}\PY{p}{)}
+          \PY{n}{df\PYZus{}nbh}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace} \PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}nbh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neighbourhood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Percent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}nbh}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neighbourhood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}nbh}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}391}]:}                   Neighbourhood   Percent
+          34  ILHAS OCEÂNICAS DE TRINDADE  1.000000
+          70                SANTOS DUMONT  0.289185
+          61                SANTA CECÍLIA  0.274554
+          62                  SANTA CLARA  0.264822
+          36                      ITARARÉ  0.262664
+          40            JESUS DE NAZARETH  0.243954
+          28                        HORTO  0.240000
+          33             ILHA DO PRÍNCIPE  0.234775
+          9                     CARATOÍRA  0.230409
+          1                    ANDORINHAS  0.230327
+          56                 PRAIA DO SUÁ  0.228261
+          27                     GURIGICA  0.225966
+          6                BENTO FERREIRA  0.224942
+          52               PARQUE MOSCOSO  0.223192
+          44                      MARUÍPE  0.222923
+          18                   DO MOSCOSO  0.222760
+          20               ENSEADA DO SUÁ  0.221277
+          3           ARIOVALDO FAVALESSA  0.219858
+          29            ILHA DAS CAIEIRAS  0.219421
+          22                 FONTE GRANDE  0.218475
+          14                   CRUZAMENTO  0.217454
+          76                     SÃO JOSÉ  0.216490
+          4                BARRO VERMELHO  0.215130
+          49                     NAZARETH  0.214815
+          60                        ROMÃO  0.213995
+          10                       CENTRO  0.210858
+          79                UNIVERSITÁRIO  0.210526
+          77                    SÃO PEDRO  0.210376
+          43                  MARIA ORTIZ  0.209991
+          63                 SANTA HELENA  0.207865
+          ..                          {\ldots}       {\ldots}
+          12                    CONQUISTA  0.188457
+          24                    FRADINHOS  0.186047
+          7                     BOA VISTA  0.185897
+          2               ANTÔNIO HONÓRIO  0.184502
+          55               PRAIA DO CANTO  0.183575
+          23               FORTE SÃO JOÃO  0.183166
+          78                   TABUAZEIRO  0.182950
+          41                  JOANA D´ARC  0.180799
+          11                      COMDUSA  0.180645
+          64                  SANTA LUÍZA  0.179907
+          37                       JABOUR  0.179753
+          50               NOVA PALESTINA  0.177562
+          57                     REDENÇÃO  0.177077
+          69                SANTO ANTÔNIO  0.176256
+          54            PONTAL DE CAMBURI  0.173913
+          13                   CONSOLAÇÃO  0.172238
+          58                    REPÚBLICA  0.171257
+          45                MATA DA PRAIA  0.170807
+          47            MORADA DE CAMBURI  0.166667
+          80                   VILA RUBIM  0.165687
+          19                    DO QUADRO  0.164900
+          39              JARDIM DA PENHA  0.162755
+          66                 SANTA MARTHA  0.158416
+          17                    DO CABRAL  0.157143
+          16                   DE LOURDES  0.154098
+          73                 SOLON BORGES  0.147122
+          48               MÁRIO CYPRESTE  0.145553
+          0                     AEROPORTO  0.125000
+          31                  ILHA DO BOI  0.085714
+          51            PARQUE INDUSTRIAL       NaN
+          
+          [81 rows x 2 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}388}]:} \PY{n}{df\PYZus{}nbh}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}388}]:}          Percent
+          count  80.000000
+          mean    0.207995
+          std     0.095039
+          min     0.085714
+          25\%     0.180461
+          50\%     0.197650
+          75\%     0.217709
+          max     1.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}357}]:} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood ==}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ILHAS OCEÂNICAS DE TRINDADE}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}357}]:}       Gender          ScheduledDay        AppointmentDay  Age  \textbackslash{}
+          48754      F  2016-04-14T12:25:43Z  2016-05-13T00:00:00Z   51   
+          48765      F  2016-04-14T12:26:13Z  2016-05-13T00:00:00Z   58   
+          
+                               Neighbourhood  Scholarship  Hipertension  Diabetes  \textbackslash{}
+          48754  ILHAS OCEÂNICAS DE TRINDADE            0             0         0   
+          48765  ILHAS OCEÂNICAS DE TRINDADE            0             0         0   
+          
+                 Alcoholism  Handcap  SMS\_received No\_show  
+          48754           0        0             0     Yes  
+          48765           0        0             0     Yes  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}383}]:} \PY{n}{df\PYZus{}nbh}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{JARDIM CAMBURI}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}383}]:}      Neighbourhood   Percent
+          38  JARDIM CAMBURI  0.189841
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}387}]:} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood ==}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{SANTOS DUMONT}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}387}]:} Gender            1276
+          ScheduledDay      1276
+          AppointmentDay    1276
+          Age               1276
+          Neighbourhood     1276
+          Scholarship       1276
+          Hipertension      1276
+          Diabetes          1276
+          Alcoholism        1276
+          Handcap           1276
+          SMS\_received      1276
+          No\_show           1276
+          dtype: int64
+\end{Verbatim}
+            
+    \begin{quote}
+The patients who live in ILHAS OCEÂNICAS DE TRINDADE are only two. It
+can be ingnored. Although Jardim Camburi seems a lot of no-show
+patients, its rate comparing to the all is lower than average rate so it
+is not significant. On the other hand, SANTOS DUMONT has higher rate of
+no-show.
+\end{quote}
+
+     \#\# Conclusions
+
+\begin{quote}
+\textbf{Tip}: Finally, summarize your findings and the results that have
+been performed. Make sure that you are clear with regards to the
+limitations of your exploration. If you haven't done any statistical
+tests, do not imply any statistical conclusions. And make sure you avoid
+implying causation from correlation!
+\end{quote}
+
+\begin{quote}
+\textbf{Tip}: Once you are satisfied with your work here, check over
+your report to make sure that it is satisfies all the areas of the
+rubric (found on the project submission page at the end of the lesson).
+You should also probably remove all of the "Tips" like this one so that
+the presentation is as polished as possible.
+\end{quote}
+
+\begin{quote}
+I would like to find out which factor is the most related to increasing
+No-show rate in Brazil hospital through this report.
+\end{quote}
+
+\begin{quote}
+• Sending SMS has the biggest difference between show and no-show group.
+The patients in No-show group are not affected by receiving SMS. On the
+other hand, the attended patients do not matter whether they received
+SMS or not. Therefore, sending SM is not an efficient way to decrease
+No-show rate.
+\end{quote}
+
+\begin{quote}
+• Case history such as hypertension, diabetes and so on is not a
+significant relationship with absence. Slightly the patients who have
+sickness have a good attendance.
+\end{quote}
+
+\begin{quote}
+• Scholarship is not helpful to reduce No-show rate. The patient with
+scholarship has more absence rate.
+\end{quote}
+
+\begin{quote}
+• Age is an import factor. Middle teenager and early 20s tend to have
+higher No-show rates.
+\end{quote}
+
+\begin{quote}
+• Location is not a visible matter of No-show. The difference of no-show
+rates base on location is not a significant. The average is 0.207 and
+25\% and 75\% rate do not have a big difference.
+\end{quote}
+
+    \subsection{Submitting your Project}\label{submitting-your-project}
+
+\begin{quote}
+Before you submit your project, you need to create a .html or .pdf
+version of this notebook in the workspace here. To do that, run the code
+cell below. If it worked correctly, you should get a return code of 0,
+and you should see the generated .html file in the workspace directory
+(click on the orange Jupyter icon in the upper left).
+\end{quote}
+
+\begin{quote}
+Alternatively, you can download this report as .html via the
+\textbf{File} \textgreater{} \textbf{Download as} submenu, and then
+manually upload it into the workspace directory by clicking on the
+orange Jupyter icon in the upper left, then using the Upload button.
+\end{quote}
+
+\begin{quote}
+Once you've done this, you can submit your project by clicking on the
+"Submit Project" button in the lower right here. This will create and
+submit a zip file with this .ipynb doc and the .html or .pdf version you
+created. Congratulations!
+\end{quote}
+
+    \subsection{Reference}\label{reference}
+
+\begin{quote}
+https://pandas.pydata.org
+\end{quote}
+
+\begin{quote}
+https://stackoverflow.com
+\end{quote}
+
+\begin{quote}
+https://matplotlib.org
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}392}]:} \PY{k+kn}{from} \PY{n+nn}{subprocess} \PY{k}{import} \PY{n}{call}
+          \PY{n}{call}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nbconvert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Investigate\PYZus{}a\PYZus{}Dataset.ipynb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}392}]:} 0
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
